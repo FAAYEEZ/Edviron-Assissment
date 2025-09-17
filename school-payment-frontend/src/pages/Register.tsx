@@ -35,10 +35,17 @@ const Register: React.FC = () => {
     try {
       setServerError('');
       await authService.register(data.email, data.password);
-      toast.success('Account created. Please sign in.');
+      toast.success('User registered successfully. Please sign in.');
       navigate('/login', { replace: true });
     } catch (e: any) {
-      const msg = e?.response?.data?.message || 'Registration failed';
+      const status = e?.response?.status as number | undefined;
+      const srvMsg: string | undefined = e?.response?.data?.message;
+      const duplicate =
+        status === 409 ||
+        (typeof srvMsg === 'string' && srvMsg.toLowerCase().includes('duplicate')) ||
+        (typeof srvMsg === 'string' && srvMsg.toLowerCase().includes('already registered'));
+
+      const msg = duplicate ? 'Email already registered' : (srvMsg || 'Registration failed');
       setServerError(msg);
       toast.error(msg);
     }

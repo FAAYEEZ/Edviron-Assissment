@@ -20,6 +20,7 @@ const createPaymentSchema = z.object({
   student_email: z.string().email('Invalid email address'),
   gateway_name: z.string().min(1, 'Gateway is required'),
   amount: z.number().min(1, 'Amount must be greater than 0'),
+  // Redirect URL removed from UI; keep type optional for backward compatibility
   redirect_url: z.string().url('Invalid URL').optional().or(z.literal('')),
 });
 
@@ -39,7 +40,7 @@ const CreatePayment: React.FC = () => {
       school_id: '65b0e6293e9f76a9694d84b4',
       trustee_id: '65b0e552dd31950a9b41c5ba',
       gateway_name: 'PhonePe',
-      redirect_url: 'http://localhost:3001/payment-success',
+      // redirect_url removed
     },
   });
 
@@ -65,7 +66,7 @@ const CreatePayment: React.FC = () => {
       },
       gateway_name: data.gateway_name,
       amount: data.amount,
-      redirect_url: data.redirect_url || undefined,
+      // No redirect_url from the form
     };
 
     createPaymentMutation.mutate(paymentData);
@@ -267,19 +268,7 @@ const CreatePayment: React.FC = () => {
                 </div>
               </div>
 
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Redirect URL (Optional)</label>
-                <Input
-                  {...register('redirect_url')}
-                  placeholder="http://localhost:3001/payment-success"
-                />
-                {errors.redirect_url && (
-                  <p className="text-sm text-destructive">{errors.redirect_url.message}</p>
-                )}
-                <p className="text-xs text-muted-foreground">
-                  URL where user will be redirected after payment completion
-                </p>
-              </div>
+              {/* Redirect URL field removed as requested */}
             </div>
 
             <Button
