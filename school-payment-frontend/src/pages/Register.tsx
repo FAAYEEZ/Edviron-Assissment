@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Navigate, Link } from 'react-router-dom';
+import { Navigate, Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
@@ -20,6 +20,7 @@ type RegisterForm = z.infer<typeof registerSchema>;
 
 const Register: React.FC = () => {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   const [serverError, setServerError] = useState<string>('');
   const { register, handleSubmit, formState: { errors } } = useForm<RegisterForm>({
     resolver: zodResolver(registerSchema),
@@ -35,7 +36,7 @@ const Register: React.FC = () => {
       setServerError('');
       await authService.register(data.email, data.password);
       toast.success('Account created. Please sign in.');
-      window.location.href = '/login';
+      navigate('/login', { replace: true });
     } catch (e: any) {
       const msg = e?.response?.data?.message || 'Registration failed';
       setServerError(msg);
