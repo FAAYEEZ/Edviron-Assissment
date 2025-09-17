@@ -5,7 +5,7 @@
     },
     "deploy": {
       "startCommand": "cd school-payment-backend && npm start",
-      "healthcheckPath": "/",
+      "healthcheckPath": "/health",
       "restartPolicyType": "ON_FAILURE"
     }
   }
