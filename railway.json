@@ -1,0 +1,12 @@
+{
+    "build": {
+      "builder": "NIXPACKS",
+      "buildCommand": "cd school-payment-backend && npm install && npm run build"
+    },
+    "deploy": {
+      "startCommand": "cd school-payment-backend && npm start",
+      "healthcheckPath": "/",
+      "restartPolicyType": "ON_FAILURE"
+    }
+  }
+  
