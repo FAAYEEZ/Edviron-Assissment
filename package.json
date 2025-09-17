@@ -1,0 +1,20 @@
+{
+    "name": "school-payment-dashboard",
+    "version": "1.0.0",
+    "description": "Complete school payment management system",
+    "private": true,
+    "scripts": {
+      "install:backend": "cd school-pay-backend && npm install",
+      "install:frontend": "cd school-pay-frontend && npm install",
+      "install:all": "npm run install:backend && npm run install:frontend",
+      "dev:backend": "cd school-pay-backend && npm run start:dev",
+      "dev:frontend": "cd school-pay-frontend && npm run dev",
+      "build:backend": "cd school-pay-backend && npm run build",
+      "build:frontend": "cd school-pay-frontend && npm run build",
+      "start:backend": "cd school-pay-backend && npm run start:prod",
+      "start:frontend": "cd school-pay-frontend && npm run preview"
+    },
+    "keywords": ["school", "payment", "dashboard", "react", "nestjs"],
+    "author": "Shaikh Faayeez",
+    "license": "MIT"
+  }
